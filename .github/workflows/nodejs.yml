@@ -43,6 +43,6 @@ jobs:
         git diff
         git config --global user.email "narze.bot@users.noreply.github.com"
         git config --global user.name "BOT"
-        git add data.json public/data.json
+        git add public/data.json
         git commit -m "Refresh data.json" || exit 0
         git push
