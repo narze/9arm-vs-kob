@@ -1,0 +1,48 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+            
+    - run: npm ci
+    - run: npm start
+    
+    - name: Commit and push if data.json changed
+      run: |-
+        git diff
+        git config --global user.email "narze.bot@users.noreply.github.com"
+        git config --global user.name "BOT"
+        git add data.json
+        git commit -m "Refresh data.json" || exit 0
+        git push
