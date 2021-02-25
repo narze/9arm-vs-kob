@@ -23,7 +23,13 @@ async function getMembers(pageName: string): Promise<number> {
 
 async function writeFile(data: Record<string, any>) {
   return new Promise((resolve) => {
-    fs.writeFile("./data.json", JSON.stringify(data, null, 2), "utf8", resolve);
+    fs.writeFile("./data.json", JSON.stringify(data, null, 2), "utf8", resolve); // Deprecated
+    fs.writeFile(
+      "./public/data.json",
+      JSON.stringify(data, null, 2),
+      "utf8",
+      resolve
+    );
   });
 }
 
