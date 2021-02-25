@@ -35,7 +35,7 @@ const diff = group9arm - groupKob;
 
 await browser.close();
 
-const data = { group9arm, groupKob, diff };
+const data = { group9arm, groupKob, diff, updatedAt: new Date().toISOString() };
 console.log(data);
 
 await writeFile(data);
