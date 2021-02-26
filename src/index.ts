@@ -46,7 +46,9 @@ async function writeHistoryFile(data: Record<string, any>) {
 
 async function fetchPreviousHistory(): Promise<Record<string, any>[]>{
   try {
-    const response = await axios.get("https://9arm-vs-kob-api.vercel.app/history.json");
+    const apiServer = process.env.GITHUB_REPOSITORY === "narze/9arm-vs-kob" ? 
+      "https://9arm-vs-kob-api.vercel.app/history.json" : "https://9arm-vs-kob-api-forked.vercel.app/history.json";
+    const response = await axios.get(apiServer);
     if(response.data === null || response.data.history === undefined ) return [];
     return response.data.history;
   } catch (error) {
