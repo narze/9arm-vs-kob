@@ -1,6 +1,5 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
-import axios from "axios";
 
 async function getMembers(pageName: string): Promise<number> {
   const url = `https://en-gb.facebook.com/groups/${pageName}/about`;
@@ -45,15 +44,14 @@ async function writeHistoryFile(data: Record<string, any>) {
 }
 
 async function fetchPreviousHistory(): Promise<Record<string, any>[]>{
-  try {
-    const apiServer = process.env.GITHUB_REPOSITORY === "narze/9arm-vs-kob" ? 
-      "https://9arm-vs-kob-api.vercel.app/history.json" : "https://9arm-vs-kob-api-forked.vercel.app/history.json";
-    const response = await axios.get(apiServer);
-    if(response.data === null || response.data.history === undefined ) return [];
-    return response.data.history;
-  } catch (error) {
-    return [];
-  }
+    return new Promise((resolve) => {
+      fs.readFile("./public/history.json", 'utf8', (err, data) => {
+        if (err) return resolve([]);
+        const json = JSON.parse(data);
+        if (json['history'] === undefined) return resolve([]);
+        return resolve(json['history']);
+      })
+    });
 }
 
 
@@ -79,5 +77,5 @@ if( lastDataFromHistory && data.diff === lastDataFromHistory.diff){
   console.log("Updating history.");
   history.push(data);
   const slicedHistory = history.slice(-5);
-  await writeHistoryFile(slicedHistory);
+  await writeHistoryFile({ history: slicedHistory });
 }
