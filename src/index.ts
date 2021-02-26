@@ -68,6 +68,7 @@ console.log(data);
 
 await writeFile(data);
 
+const historyLimit = 100;
 const history = await fetchPreviousHistory();
 const lastDataFromHistory  = history[history.length - 1]; 
 
@@ -76,6 +77,6 @@ if( lastDataFromHistory && data.diff === lastDataFromHistory.diff){
 }else{
   console.log("Updating history.");
   history.push(data);
-  const slicedHistory = history.slice(-5);
+  const slicedHistory = history.slice(-historyLimit);
   await writeHistoryFile({ history: slicedHistory });
 }
