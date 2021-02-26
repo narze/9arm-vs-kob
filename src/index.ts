@@ -43,17 +43,16 @@ async function writeHistoryFile(data: Record<string, any>) {
   });
 }
 
-async function fetchPreviousHistory(): Promise<Record<string, any>[]>{
-    return new Promise((resolve) => {
-      fs.readFile("./public/history.json", 'utf8', (err, data) => {
-        if (err) return resolve([]);
-        const json = JSON.parse(data);
-        if (json['history'] === undefined) return resolve([]);
-        return resolve(json['history']);
-      })
+async function fetchPreviousHistory(): Promise<Record<string, any>[]> {
+  return new Promise((resolve) => {
+    fs.readFile("./public/history.json", "utf8", (err, data) => {
+      if (err) return resolve([]);
+      const json = JSON.parse(data);
+      if (json["history"] === undefined) return resolve([]);
+      return resolve(json["history"]);
     });
+  });
 }
-
 
 const browser = await puppeteer.launch();
 
@@ -63,18 +62,32 @@ const diff = group9arm - groupKob;
 
 await browser.close();
 
-const data = { group9arm, groupKob, diff, updatedAt: new Date().toISOString() };
+const historyLimit = 100;
+const history = await fetchPreviousHistory();
+const lastDataFromHistory = history[history.length - 1];
+const data = {
+  group9arm,
+  groupKob,
+  diff,
+  updatedAt: new Date().toISOString(),
+  diffChanged: 0,
+};
+
+if (lastDataFromHistory) {
+  data.diffChanged = diff - lastDataFromHistory.diff;
+}
+
 console.log(data);
 
 await writeFile(data);
 
-const historyLimit = 100;
-const history = await fetchPreviousHistory();
-const lastDataFromHistory  = history[history.length - 1]; 
-
-if( lastDataFromHistory && data.diff === lastDataFromHistory.diff){
+if (
+  lastDataFromHistory &&
+  data.group9arm === lastDataFromHistory.group9arm &&
+  data.groupKob === lastDataFromHistory.groupKob
+) {
   console.log("Same data no update.");
-}else{
+} else {
   console.log("Updating history.");
   history.push(data);
   const slicedHistory = history.slice(-historyLimit);
