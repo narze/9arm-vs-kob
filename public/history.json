@@ -4423,6 +4423,13 @@
       "diff": 7530,
       "updatedAt": "2021-03-10T13:26:51.559Z",
       "diffChanged": 0
+    },
+    {
+      "group9arm": 81224,
+      "groupKob": 73690,
+      "diff": 7534,
+      "updatedAt": "2021-03-10T13:44:01.530Z",
+      "diffChanged": 4
     }
   ]
 }
