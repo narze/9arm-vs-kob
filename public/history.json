@@ -5438,6 +5438,13 @@
       "diff": 7560,
       "updatedAt": "2021-03-13T10:56:17.904Z",
       "diffChanged": 5
+    },
+    {
+      "group9arm": 81770,
+      "groupKob": 74209,
+      "diff": 7561,
+      "updatedAt": "2021-03-13T11:22:37.537Z",
+      "diffChanged": 1
     }
   ]
 }
