@@ -1,13 +1,6 @@
 {
   "history": [
     {
-      "group9arm": 77624,
-      "groupKob": 71431,
-      "diff": 6193,
-      "updatedAt": "2021-03-01T04:25:50.198Z",
-      "diffChanged": 4
-    },
-    {
       "group9arm": 77636,
       "groupKob": 71437,
       "diff": 6199,
@@ -6999,6 +6992,13 @@
       "diff": 9096,
       "updatedAt": "2021-03-20T10:23:48.205Z",
       "diffChanged": 0
+    },
+    {
+      "group9arm": 84641,
+      "groupKob": 75541,
+      "diff": 9100,
+      "updatedAt": "2021-03-20T10:46:23.419Z",
+      "diffChanged": 4
     }
   ]
 }
