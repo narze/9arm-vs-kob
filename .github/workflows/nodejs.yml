@@ -41,7 +41,7 @@ jobs:
     - name: Commit and push if data.json changed
       run: |-
         git diff
-        git config --global user.email "85010507+notbarze@users.noreply.github.com"
+        git config --global user.email "notbarze@users.noreply.github.com"
         git config --global user.name "narze's bot"
         git add public/data.json
         git add public/history.json
