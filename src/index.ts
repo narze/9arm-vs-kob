@@ -62,7 +62,7 @@ const diff = group9arm - groupKob;
 
 await browser.close();
 
-const historyLimit = 1000;
+const historyLimit = 10000;
 const history = await fetchPreviousHistory();
 const lastDataFromHistory = history[history.length - 1];
 const data = {
