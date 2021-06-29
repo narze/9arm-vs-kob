@@ -7664,6 +7664,13 @@
       "diff": 20100,
       "updatedAt": "2021-06-29T16:32:09.330Z",
       "diffChanged": -2
+    },
+    {
+      "group9arm": 108199,
+      "groupKob": 88094,
+      "diff": 20105,
+      "updatedAt": "2021-06-29T20:20:00.476Z",
+      "diffChanged": 5
     }
   ]
 }
