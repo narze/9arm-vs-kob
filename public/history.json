@@ -17170,6 +17170,13 @@
       "diff": 23383,
       "updatedAt": "2022-02-14T01:09:07.415Z",
       "diffChanged": 12
+    },
+    {
+      "group9arm": 133135,
+      "groupKob": 109756,
+      "diff": 23379,
+      "updatedAt": "2022-02-14T04:26:05.974Z",
+      "diffChanged": -4
     }
   ]
 }
